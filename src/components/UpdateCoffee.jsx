@@ -6,7 +6,7 @@ const UpdateCoffee = () => {
     const coffee = useLoaderData();
     const { _id, name, chef, supplier, test, category, photo, details } = coffee;
 
-    console.log(coffee);
+    // console.log(coffee);
 
     const handleUpdateCoffee = e => {
             e.preventDefault();
@@ -33,10 +33,10 @@ const UpdateCoffee = () => {
                 .then(res => res.json())
                 .then(data => {
                     // cosole.log(data);
-                    if (data.insertedId) {
+                    if (data.modifiedCount > 0) {
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Coffee added successfully',
+                            text: 'Coffee updated successfully',
                             icon: 'success',
                             confirmButtonText: 'Done'
                         })
