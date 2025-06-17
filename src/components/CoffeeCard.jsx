@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const CoffeeCard = ({ coffee }) => {
-    const { _id, name, chef, supplier, test, category, photo, details } = coffee;
+    const { _id, name, test, category, photo, details } = coffee;
 
     const handleDelete = _id => {
         console.log(_id);
@@ -26,7 +26,7 @@ const CoffeeCard = ({ coffee }) => {
                         if (data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "Your Coffee has been deleted.",
                                 icon: "success"
                             });
                             // console.log('delete confirmed');
@@ -45,8 +45,8 @@ const CoffeeCard = ({ coffee }) => {
             <div className="flex justify-between items-center w-full">
                 <div>
                     <h2 className="card-title">{name}</h2>
-                    {/* <p>{chef}</p> */}
-                    {/* <p>{supplier}</p> */}
+                    {/* <p>{chef}</p>
+                    <p>{supplier}</p> */}
                     <p>{test}</p>
                     <p>{category}</p>
                     <p>{details}</p>
