@@ -30,7 +30,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                                 icon: "success"
                             });
                             // console.log('delete confirmed');
-                            const remaining = coffees.filter(cof => cof._id !== _id)
+                            const remaining = coffees.filter(cof => cof._id !== _id)    
                             setCoffees(remaining);
                         }
                     })
