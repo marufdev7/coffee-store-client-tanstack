@@ -22,6 +22,9 @@ function App() {
                     <button className='btn btn-active'>
                         <Link to={"/signup"}>Sign up</Link>
                     </button>
+                    <button className='btn btn-active'>
+                        <Link to={"/users"}>Users</Link>
+                    </button>
                 </div>
             </div>
             <div className='grid md:grid-cols-2 gap-4'>
