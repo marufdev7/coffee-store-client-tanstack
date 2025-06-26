@@ -1,9 +1,43 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Users = () => {
     const loadedData = useLoaderData();
     const [users, setUsers] = useState(loadedData);
+
+    const handleDeleteUser = id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+
+                //delete from database
+                fetch(`http://localhost:5000/users/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+                            const remaining = users.filter(user => user._id !== id);
+                            setUsers(remaining);
+                        }
+                    })
+            }
+        });
+    }
     return (
         <div>
             <h1>users are here {users.length}</h1>
@@ -22,14 +56,16 @@ const Users = () => {
                     <tbody>
                         {
                             users.map((user, idx) => (
-                                <tr key={user._id}>
+                                <tr className='hover ' key={user._id}>
                                     <th>{idx + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user.createdAt}</td>
                                     <td>
                                         <button className='btn'>E</button>
-                                        <button className='btn ml-2'>X</button>
+                                        <button className='btn ml-2'
+                                            onClick={() => handleDeleteUser(user._id)}
+                                        >X</button>
                                     </td>
                                 </tr>
                             ))
