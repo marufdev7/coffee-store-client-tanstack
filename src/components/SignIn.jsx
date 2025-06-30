@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
+import { Link } from 'react-router-dom';
 
 
 const SignIn = () => {
@@ -13,13 +14,42 @@ const SignIn = () => {
         // console.log(email, password);
         signInUser(email, password)
             .then(result => {
-            console.log(result.user);
+                console.log(result.user);
+
+                //update last login time
+                const lastSignInTime = result?.user?.metadata?.lastSignInTime;
+                const loginInfo = { email, lastSignInTime };
+
+                fetch(`http://localhost:5000/users`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(loginInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                    console.log('sign in data is updated', data);
+                    })
+                
+                // fetch(`http://localhost:5000/users`, {
+                //     method: 'PATCH',
+                //     headers: {
+                //         'content-type' : 'application/json',
+                //     },
+                //     body: JSON.stringify(loginInfo),
+                // })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         console.log('sign in info is updated', data);
+                //     })
+                
             })
             .catch(error => {
-            console.log(error.message);
-        })
+                console.log(error.message);
+            })
     }
-    
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -50,6 +80,9 @@ const SignIn = () => {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Login</button>
                         </div>
+                        <p>
+                            New coffee drinker? <button className='font-medium text-gray-700'><Link to="/signup">Sign Up</Link></button>
+                        </p>
                     </form>
                 </div>
             </div>
