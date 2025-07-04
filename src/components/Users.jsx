@@ -20,17 +20,17 @@ const Users = () => {
 
 
                 //delete from database
-                fetch(`http://localhost:5000/users/${id}`, {
+                fetch(`https://coffee-store-server-three-sooty.vercel.app/users/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
                             const remaining = users.filter(user => user._id !== id);
                             setUsers(remaining);
                         }

@@ -9,40 +9,40 @@ const UpdateCoffee = () => {
     // console.log(coffee);
 
     const handleUpdateCoffee = e => {
-            e.preventDefault();
-    
-            const form = e.target;
-            const name = form.name.value;
-            const chef = form.chef.value;
-            const supplier = form.supplier.value;
-            const test = form.test.value;
-            const category = form.category.value;
-            const photo = form.photo.value;
-            const details = form.details.value;
-    
-            const updatedCoffee = { name, chef, supplier, test, category, photo, details };
-            // console.log(newCoffee);
-    
-            fetch(`http://localhost:5000/coffee/${_id}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(updatedCoffee)
+        e.preventDefault();
+
+        const form = e.target;
+        const name = form.name.value;
+        const chef = form.chef.value;
+        const supplier = form.supplier.value;
+        const test = form.test.value;
+        const category = form.category.value;
+        const photo = form.photo.value;
+        const details = form.details.value;
+
+        const updatedCoffee = { name, chef, supplier, test, category, photo, details };
+        // console.log(newCoffee);
+
+        fetch(`https://coffee-store-server-three-sooty.vercel.app/coffee/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedCoffee)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // cosole.log(data);
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Coffee updated successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    })
+                }
             })
-                .then(res => res.json())
-                .then(data => {
-                    // cosole.log(data);
-                    if (data.modifiedCount > 0) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'Coffee updated successfully',
-                            icon: 'success',
-                            confirmButtonText: 'Done'
-                        })
-                    }
-                })
-        }
+    }
     return (
         <div className='bg-[#F4F3F0]'>
             <h2 className='text-2xl font-bold pt-5 text-center'>Update Coffee: {coffee.name}</h2>

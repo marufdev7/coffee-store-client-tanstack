@@ -20,7 +20,7 @@ const SignIn = () => {
                 const lastSignInTime = result?.user?.metadata?.lastSignInTime;
                 const loginInfo = { email, lastSignInTime };
 
-                fetch(`http://localhost:5000/users`, {
+                fetch(`https://coffee-store-server-three-sooty.vercel.app/users`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json',
@@ -29,10 +29,10 @@ const SignIn = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                    console.log('sign in data is updated', data);
+                        console.log('sign in data is updated', data);
                     })
-                
-                // fetch(`http://localhost:5000/users`, {
+
+                // fetch(`https://coffee-store-server-three-sooty.vercel.app/users`, {
                 //     method: 'PATCH',
                 //     headers: {
                 //         'content-type' : 'application/json',
@@ -43,7 +43,7 @@ const SignIn = () => {
                 //     .then(data => {
                 //         console.log('sign in info is updated', data);
                 //     })
-                
+
             })
             .catch(error => {
                 console.log(error.message);
