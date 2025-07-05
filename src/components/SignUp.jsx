@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
 
@@ -82,6 +83,9 @@ const SignUp = () => {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Sign Up</button>
                         </div>
+                        <p>
+                            Already have an account? <button className='font-medium text-gray-700'><Link to="/signin">Sign In</Link></button>
+                        </p>
                     </form>
                 </div>
             </div>
