@@ -14,8 +14,8 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import {
-  QueryClient,
-  QueryClientProvider,
+    QueryClient,
+    QueryClientProvider,
 } from '@tanstack/react-query'
 import Users2 from './components/Users2.jsx';
 
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <App />,
-                loader: () => fetch('https://coffee-store-server-three-sooty.vercel.app/coffee')
+                loader: () => fetch('http://localhost:5000/coffee')
             },
             {
                 path: "/add-coffee",
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             {
                 path: "/update-coffee/:id",
                 element: <UpdateCoffee />,
-                loader: ({ params }) => fetch(`https://coffee-store-server-three-sooty.vercel.app/coffee/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`)
             },
             {
                 path: "/signin",
@@ -50,12 +50,12 @@ const router = createBrowserRouter([
             {
                 path: "users",
                 element: <Users />,
-                loader: () => fetch('https://coffee-store-server-three-sooty.vercel.app/users')
+                loader: () => fetch('http://localhost:5000/users')
             },
             {
                 path: "users2",
                 element: <Users2 />,
-                
+
             }
         ]
     },

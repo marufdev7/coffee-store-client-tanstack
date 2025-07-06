@@ -20,7 +20,7 @@ const Users = () => {
 
 
                 //delete from database
-                fetch(`https://coffee-store-server-three-sooty.vercel.app/users/${id}`, {
+                fetch(`http://localhost:5000/users/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())

@@ -1,9 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import Swal from 'sweetalert2';
 
 const Users2 = () => {
 
-
+    const { isPending, isError, error, data: users } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/users');
+            return res.json();
+        }
+    })
 
     const handleDeleteUser = id => {
         Swal.fire({
@@ -19,7 +26,7 @@ const Users2 = () => {
 
 
                 //delete from database
-                fetch(`https://coffee-store-server-three-sooty.vercel.app/users/${id}`, {
+                fetch(`http://localhost:5000/users/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())
@@ -37,9 +44,18 @@ const Users2 = () => {
             }
         });
     }
+
+    if (isPending) {
+        return <span className="loading loading-spinner loading-md"></span>
+    }
+
+    if (isError) {
+        return <p>Error:{error.message}</p>
+    }
+
     return (
         <div>
-            <h1>users are here {users.length}</h1>
+            {/* <h1>users are here {users.length}</h1> */}
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
